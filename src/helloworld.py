@@ -1,4 +1,6 @@
 import click
+from hello_from import helloFrom
+from hello_to import helloTo 
       
 # Group definition
 @click.group()
@@ -9,15 +11,16 @@ def cli():
 @cli.command("from", help="Say hello from someone")
 @click.argument("name")
 def commandFrom(name):
-    click.echo(f"{name} say Hello ! ")
+    click.echo(helloFrom(name))
 
 # To command
 @cli.command("to", help="Say hello to someone.")
 @click.argument("name")
 @click.option("--count", default=1, help="Number of greetings.")
 def commandTo(name, count):
-    for _ in range(count):
-        click.echo(f"Hello, {name} !")
+    list = helloTo(name, count)
+    for entry in list:
+        click.echo(entry)
 
 # Main
 if __name__ == "__main__":
